@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<!-- 
+Vanessa Knoppke-Wetzel
+last edited 2/27/2013 -->
+<!-- thanks to bootstrap for their responsive code design, and leaflet for their js -->
+
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Wolf Pop'n, NW US: 99-08</title>
+
+		
+
+		 <!-- Bootstrap Styleheets -->
+		<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href="css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+		<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+			<script src="../assets/js/html5shiv.js"></script>
+		<![endif]-->
+		<!--[if lte IE 8]>
+		<link rel="stylesheet" href="css/leaflet.ie.css" />
+		<![endif]-->
+		
+		<!--leaflet stylesheet-->
+		<link rel="stylesheet" href="css/leaflet.css" />
+
+		
+		<!--jQueryUI stylesheet-->
+		 <link rel="stylesheet" href="lib/jquery-ui/css/overcast/jquery-ui-1.10.1.custom.min.css" />
+		
+	
+		<!--main stylesheet-->
+		<link rel="stylesheet" href="css/style.css" />
+
+
+		<!-- responsive design stuff bootstrap -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="css/bootstrap-responsive.css" rel="stylesheet">
+	</head>
+	<body>
+		<!-- fluid container, rows, and spans allowing for responsive design -->
+		<div class="container-fluid">
+			<div="row-fluid">  
+				<div class = "span12">
+					<h1> 
+						<div id = "title">Wolf Pack Populations in the Northwestern United States:
+						</div> <!-- end title -->
+						<div id="small">
+						</div><!--  end small -->
+					</h1>
+				</div> <!-- end span12 -->
+					
+				<div class = "row-fluid">
+					<div class = "span4">
+						<div class="wordwrap" style="float">Since the 1930s, wolf populations across the States became severely diminished due to mass hunts,misconceptions, and stereotypes - nearly wiping out most wolf species, and causing the extinction of many others. This map shows an animation of pack population of one of the species that survived,  gray wolves, in the Northwestern United States. Because of heavy conservation efforts, this map shows their slow recovery in this area between 1999 and 2008.
+							<br>For more about these and other packs, visit the US Fish and Wildlife's<a href="http://www.fws.gov/mountain-prairie/species/mammals/wolf/" target="_blank"> Gray Wolf Page</a> and the
+							<a href="http://www.defenders.org/gray-wolf/basic-facts"target="_blank"> Defenders of Wildlife</a> to learn more.
+							</br>
+							<a class="legend"><img src="img/legend.png" alt="legend" style="float"/> </a>
+							<p>Map Data Source: the US Fish and Wildlife's Gray Wolf Data 
+								<br>Page created by: Vanessa Knoppke-Wetzel</br>
+							</p></div> <!-- end wordwrap -->
+					</div> <!-- end span4-->
+					
+					<div class="span8">
+						<!--div for the map-->
+						<div id="map" style="float"></div>
+						
+						
+						<!--vcr controls-->
+						<div id="vcr-controls">
+							<a class="vcr back-full"><img src="img/back-full.png" alt="back full"/></a>
+							<a class="vcr back"><img src="img/back.png" alt="back"/></a>
+							<a class="vcr play"><img src="img/play.png" alt="play"/></a>
+							<a class="vcr pause"><img src="img/pause.png" alt="pause"/></a>
+							<a class="vcr step"><img src="img/step.png" alt="step"/></a>
+							<a class="vcr step-full"><img src="img/step-full.png" alt="step full"/></a>
+						</div>
+						
+						<!--div for the timestamp slider-->
+						<div id="timeSlider"></div>
+						<!-- <div class="clear"></div> -->
+
+					</div> <!-- end span8-->
+					
+					
+				</div> <!-- end rowfluid2 -->
+			</div> <!-- end rowfluid	 -->
+		</div> <!-- end container -->
+		
+		
+
+		
+		
+		
+		<!--libraries-->
+		<script src="js/leaflet-src.js"></script>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script src="js/jquery-1.9.1.min.js"></script>
+        <script src="lib/jquery-ui/js/jquery-ui-1.10.1.custom.min.js"></script>
+		<script src="js/bootstrap.js"></script>
+		
+			
+		<script type="text/javascript" src="js/bootstrap-responsive.min.js"></script> 
+
+
+		
+		<!--link to CSV prototype functions-->
+		<script src="js/EventTarget.js"></script>
+		<script src="js/ProcessCSV.js"></script>
+		
+		<!--link to main javascript file-->
+		<script src="js/main.js"></script>
+
+	</body>
+</html>

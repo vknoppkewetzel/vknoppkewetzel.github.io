@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<!--Vanessa Knoppke-Wetzel
+Tourist Map of ConCon, Chile
+last edited November 17th, 2012
+ALL ICONS CREATED BY V. KNOPPKE-WETZEL-->
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<!--setting tab label-->
+	<title>ConCon</title>
+	<!--linking style sheet-->
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+
+	
+	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+</head>
+<body>
+	<!--setting the wrapper, aka what will hold all the content of this page-->
+	<div id="wrapper">
+		<h1>Places to go & Things to See in ConCon, Chile</h1>
+		<div id="map"></div>  <!-- map is placed within this div -->
+		
+		
+	</div><!-- end wrapper -->	
+	<script type="text/javascript">
+		<!--defining map parameters, as well as the coordinates-->
+		var map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 13,
+			center: new google.maps.LatLng (-32.920664,-71.521537), <!-- (-32.926428,-71.523425), -->
+			mapTypeId: google.maps.MapTypeId.SATELLITE 
+		});
+
+		// populate an array with our data
+		var locations = [
+			["Sandboard",-32.939611,-71.547221,"  Sandboarding","Sandboarding!"],
+			["Surf",-32.919502,-71.514056,"  La Boca","SURF"],
+			["Surf",-32.923159,-71.525009,"  Playa Amarilla","SURF"],
+			["Surf",-32.926847,-71.528453,"  Playa Negra","SURF"],
+			["Surf",-32.929769,-71.532262,"  Las Bahamas","SURF"],
+			["Surf",-32.910217,-71.507696,"  Punta Piedra","SURF"],
+			["Food",-32.921052,-71.508256,"  La Deliciosa","Come try some empanadas!"],
+			["Food",-32.930768,-71.537642,"  Sector Mariscos","A lot of restaurants are located on this road: all serving some great Chilean seafood combinations."],
+			["Food",-32.929769,-71.541698,"  Pica Higuerrillas","A well known restaurant in ConCon that serves seafood."],
+			["Food",-32.92029,-71.518271,"  Santa Brasa","A well known Chilean restaurant, known for its delicious grilled meats."],
+			["Tree",-32.941202,-71.55322,"  Las Dunas","A beautiful nature preserve: come see HUGE sand dunes!"],
+			["Tree",-32.91331,-71.507361,"  Humedal","A nature preserve!"],
+			["Rent",-32.919827,-71.512844,"  Rent Surf Equipment","Rent equipment and learn!"],
+			["Rent",-32.920597,-71.512339," Rent Surf Equipment","Rent equipment and learn!"],
+			["Rent",-32.931246,-71.535883,"  Rent Surf Equipment","Rent equipment and learn!"],
+			["Yacht",-32.928083,-71.541902,"  Yacht Club","Got a yacht? Want to see the coast? Take a ride? Come here!"],
+			["Fish",-32.929706,-71.538646,"  Fresh Fish","Buy Fresh and eat fresh!"],
+			["Fish",-32.918120,-71.521474,"  Fresh Fish","Buy Fresh and eat fresh!"],
+			["Museum",-32.920020,-71.517413,"  Museum","Come see some of ConCon's history!"],
+			["Horse",-32.918633,-71.510198,"  Rent Horses","Have some fun riding horses on the beach!"],
+			["Horse",-32.896536,-71.504198," Rent Horses","Have fun riding horses on the beach!"],
+			["Shop",-32.930606,-71.518832,"  Supermarket","Santa Isabel, a supermarket where you can get all your food needs: especially for asados."],
+			["Shop",-32.939557,-71.545998,"  Supermarket","Jumbo, a supermarket where you can get all your food needs: especially for asados."],
+			["Shop",-32.944023,-71.545953,"  Supermarket","Lider, a supermarket where you can get all your food needs: especially for asados."],
+			["Motorcross",-32.897088,-71.504045,"  Motorcross","Come ride motorcross across the sand!"]
+
+		];
+
+		var infowindow = new google.maps.InfoWindow();
+
+		var marker, i;
+					
+		for (i = 0; i < locations.length; i++) 
+		{
+			var iconImage, heading;
+			<!--setting a switch statement depending on the case, aka each type/image/icon-->
+			switch(locations[i][0]) {
+				case "Sandboard":
+					iconImage = "img/snowboard.png";
+					heading = "<h2 class='sandboard-area'><img src="+iconImage+" />"+locations[i][3]+"</h2>";
+					break;
+				case "Surf":
+					iconImage = "img/wave.png";
+					heading = "<h2 class='surf-area'><img src="+iconImage+" />"+locations[i][3]+"</h2>";
+					break;
+				case "Food":
+					iconImage = "img/food_.png";
+					heading = "<h2 class='food-area'><img src="+iconImage+" />"+locations[i][3]+"</h2>";
+					break;
+				case "Tree":
+					iconImage = "img/tree.png";
+					heading = "<h2 class=tree-area'><img src="+iconImage+" />"+locations[i][3]+"</h2>";
+					break;
+				case "Rent":
+					iconImage = "img/rent.png";
+					heading = "<h2 class='rent-area'><img src="+iconImage+" />"+locations[i][3]+"</h2>";
+					break;
+				case "Yacht":	
+					iconImage = "img/yacht.png";
+					heading = "<h2 class='yacht-area'><img src="+iconImage+" />"+locations[i][3]+"</h2>";
+					break;
+				case "Fish":	
+					iconImage = "img/fish.png";
+					heading = "<h2 class='fish-area'><img src="+iconImage+" />"+locations[i][3]+"</h2>";
+					break;
+				case "Shop":
+					iconImage = "img/shop.png";
+					heading = "<h2 class='shop-area'><img src="+iconImage+" />"+locations[i][3]+"</h2>";
+					break;
+				case "Horse":
+					iconImage = "img/horse.png";
+					heading = "<h2 class='horse-area'><img src="+iconImage+" />"+locations[i][3]+"</h2>";
+					break;
+				case "Museum":
+					iconImage = "img/museum.png";
+					heading = "<h2 class='museum-area'><img src="+iconImage+" />"+locations[i][3]+"</h2>";
+					break;
+				case "Motorcross":
+					iconImage = "img/moto.png";
+					heading = "<h2 class='moto-area'><img src="+iconImage+" />"+locations[i][3]+"</h2>";
+					break;
+			}
+			marker = new google.maps.Marker({
+				icon: iconImage,
+				position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+				map: map
+			});
+			google.maps.event.addListener(marker, 'click', (function(marker, i, heading) {
+				return function() {
+					markerContent =	heading+"</h2><p><b>Description:</b> "+ locations[i][4]+"</p>";
+					infowindow.setContent(markerContent);
+					infowindow.open(map, marker);
+				}
+			})(marker, i, heading));  // end marker click function
+		}; // end for loop		
+	</script>
+	
+	<!--the legend that will allow map readers to understand what the icons are-->
+	<table border="0">
+		<tr>
+		<th><FONT COLOR="2449b7">Extreme Sports:</FONT></th>
+		<th><FONT COLOR="9e0000">Good Eatin':</FONT></th>
+		<th><FONT COLOR="3d9941">Leisurely Things to Do:</FONT></th>
+		</tr>
+		<tr>
+		<td><img src="img/snowboard.png" alt="Sandboard" />    Sandboarding</td>
+		<td><img src="img/food_.png" alt="Food" />    Places to Eat</td>
+		<td><img src="img/tree.png" alt="Nature Preserve" />    Nature Preserve</td>
+		</tr>
+		<tr>
+		<td><img src="img/wave.png" alt="Surf Spot" />    Surfing Spots</td>
+		<td><img src="img/shop.png" alt="Supermarkets" />    Supermarkets</td>
+		<td><img src="img/horse.png" alt="Ride Horses" />    Ride Horses</td>
+		</tr>
+		<tr>
+		<td><img src="img/rent.png" alt="Rent Equipment" />    Rent Equipment</td>
+		<td><img src="img/fish.png" alt="Fresh Fish" />    Fresh Fish</td>
+		<td><img src="img/yacht.png" alt="Yacht Club" />    Yacht Club</td>
+		</tr>
+		<tr>
+		<td><img src="img/moto.png" alt="Motorcross" />    Motorcross</td>
+		<td></td>
+		<td><img src="img/museum.png" alt="Museum" />    Museum</td>
+		</tr>
+		</table>
+	
+	</div>
+</body>
+</html>

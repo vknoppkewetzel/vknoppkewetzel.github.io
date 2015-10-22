@@ -1,0 +1,65 @@
+/* Vanessa Knoppke-Wetzel
+Lab 3, Slippy Map with Icons
+ConCon, Chile
+ */
+
+ /*editing body, mainly just bckgrnd*/
+body {
+	background-image: url(../img/dune.jpg);
+	background-size: 100%;
+}
+
+/*h1, h2, h3: editing header texts, most importantly, h1 aka the title of the page*/
+h1 {
+	color: #364854;
+	margin-top:0px;
+	width: 100%;
+	padding: 0;
+	margin: 0px;
+	font-family: "Trajan Pro", Serif; 
+	text-align: center;
+	font-size: 3em;
+}
+h2 {
+	font-size: 1em;
+	color: #364854;
+	padding: 0;
+	margin: 0;
+}
+
+h3{
+	font-size: .5em;
+	color: #364854;
+	padding: 0;
+	margin: 0;
+}
+
+/*defining the wrapper, aka the width of the map inset*/
+#wrapper {
+	width: 100%;
+	margin: 0 auto;
+}
+
+/*setting map parameters*/
+#map {
+	font-family: "Trajan Pro", Serif;
+	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 55%;
+	height: 390px;
+	border: 0px;
+}
+
+/*setting table parameters*/
+table, th, td{
+	font-size: 1em;
+	margin-left: auto;
+	margin-right: auto;
+	padding:5px;
+	#font-weight: bold;
+	margin-top: 5px;
+	color: #171c27;
+	font-family: "Trajan Pro", Serif;
+}
+

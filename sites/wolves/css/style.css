@@ -1,0 +1,99 @@
+@charset "utf-8";
+/* CSS Document */
+/* Vanessa Knoppke-Wetzel
+last edited 3/13/2013 */
+/* background image source: http://www.mrwallpaper.com/Mountains-Gray-Wolf-wallpaper/ */
+
+body {
+	background: url(../img/wwolf.jpg);
+	#background-repeat:no-repeat;
+	background-attachment: fixed;
+	background-position: 50% 50%;
+	#background-size: cover;
+	overflow-y: auto;
+	color: #82949c;
+	font-family: "Bell Gothic std", Helvetica, sans-serif;
+}
+
+#map {
+	height: 450px;
+	width: 650px;
+	#position: absolute;
+	#margin-right: auto;
+	border-style: solid;
+	border-width: 3px;
+	border-color: #483a3a;
+	}
+
+.container-fluid{
+	width: 75%;
+	margin-left: auto;
+	margin-right: auto;
+}
+	
+#vcr-controls {
+	margin: 8x 0 0 5px;
+	padding: 3px;
+}
+.vcr {
+	float: left;
+	margin-right: 3px;
+	width: 60px;
+	height: 40px;
+}
+.vcr:hover {
+	opacity: .4;
+}
+#timeSlider {
+	float: auto;
+	margin: 10px 20px 0 350px;
+	width: 300px;
+}
+
+.legend{
+	float: right;
+}
+
+.wordwrap{
+	
+	/*width: 0px;*/
+	margin-top: 15%;
+	margin-right: 5%;
+	margin-left: 5%;
+	word-wrap:break-word;
+	color:#483a3a;
+	font-size:18px;
+}
+
+p{
+	margin-top:10%;
+	font-size:10px;
+	font-family: "Bell Gothic std",  Helvetica, sans-serif;
+	
+}
+
+#title{
+	font-family: "MS Reference Sans",  Helvetica, sans-serif;
+	color: #663333;
+	margin-top: 2%;
+}
+
+#small{
+	font-family: "DejaVu Sans",  Helvetica, sans-serif;
+	color: #330000;
+	font-size: 130%;
+	margin-top: 2%;
+	margin-bottom: 3%;
+	margin-left: 80%;
+}
+
+
+a:link{
+	text-decoration: none;
+	color: #660000 ;
+}
+
+a:visited{
+	text-decoration: none;
+	color: #330000 ;
+}

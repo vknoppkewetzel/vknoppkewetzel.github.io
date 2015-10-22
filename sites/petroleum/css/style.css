@@ -1,0 +1,155 @@
+/* Vanessa Knoppke-WEtzel
+last edited 4/17/2013 */
+
+svg {
+	position: absolute;
+} 
+
+body{
+	background: url(../data/texture.jpg);
+	background-attachment: fixed;
+	background-position: 50% 50%;
+	font-family: "Two Cen MT",Helvetica, sans-serif;
+	font-size:25px;
+}
+
+#container{
+	margin: 0 3%;
+	width:94%;
+	height: 100%;
+	position: relative;
+}
+#map-container {
+	width: 800px;
+	height: 460px;
+	float: left;
+	margin-left: 10px;
+	margin-top: 30px;
+	position: relative;
+}
+
+#pcp-container{
+	margin-left: 30px;
+	width: 550px;
+	height: 500px;
+	margin-top: 30px;
+	position: relative;
+	float:right;
+}
+
+h1{
+	text-align: center;
+
+}
+
+
+#words{
+	margin-top: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	
+}
+
+p{
+	text-align: center;
+	font-family: "Meiryo UI",Helvetica, sans-serif;
+	font-size: 20px;
+	font-style: regular; 
+}
+
+#created{
+	position: relative;
+	font-size: 10px;
+	color: #440823;
+	font-weight: bold;
+	float: right;
+}
+
+a:link {
+	color:#EE76AC;
+	font-style: italic; 
+	text-decoration: none;
+	}      /* unvisited link */
+a:visited {
+	color:#440823;
+	font-style: regular; 
+	text-decoration: none;
+}  /* visited link */
+a:hover {
+	color:#DD1C77;
+	font-weight: bold;
+	text-transform: lowercase;
+	text-decoration: none;
+}  /* mouse over link */
+/*a:active {
+	color:#0000FF;
+	text-decoration: none;
+}*/
+
+#title{
+	#margin-right: 120px;
+	text-align: center;
+	font-family: "Meiryo UI",Helvetica, sans-serif;
+	font-size: 50px;
+}
+
+.STs {
+  fill: #CD5C5C;
+  stroke: #15030B;
+  stroke-width: 1px;
+  
+}
+
+.infolabel {
+	position: absolute;
+	width: 120px;
+	height: 60px;
+	color: #330000;
+	background-color: #8B8989;
+	padding: 5px;
+	border-radius: 15px;
+	-moz-border-radius: 15px;
+	
+}
+
+.infolabel h1 {
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+	font-size:25px;
+	
+}
+
+.infolabel b {
+	float: left;
+	font-size: 15px;
+}
+
+.labelname {
+	display: inline-block;
+	float: right;
+	/*margin: -25px 0px 0px 40px;*/
+	position: absolute;
+	font-size: 15px;
+}
+
+.pcplot {
+	margin-top: 10px;
+}
+
+
+.pcpLines path {
+		fill: none;
+		stroke-width: 2px;
+		stroke: #8B8989;
+	}
+
+.axes path {
+	fill: none;
+	stroke: #440823;
+	stroke-width: 5px;
+	stroke-opacity: 1px;
+	stroke-linecap: round;
+	font-family: "Helvetica", Arial, sans-serif;
+	
+}
