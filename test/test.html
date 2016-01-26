@@ -31,7 +31,7 @@ div.tooltip {
   padding: .5em; 
     font-family: sans-serif;
   text-shadow: #f5f5f5 0 1px 0;
-  border-radius: 20px; 
+  border-radius: 25px; 
   box-shadow: 0px 0px 2px 0px #a6a6a6; 
   opacity: 0.9; 
   position: absolute;
@@ -124,7 +124,7 @@ function draw(topo) {
       .attr("class", "country")
       .attr("d", path)
       .attr("id", function(d,i) { return d.id; })
-      .attr("title", function(d,i) { return d.properties.name; });
+      .attr("title", function(d,i) { return d.properties.name; })
       .style("fill", function(d, i) { return d.properties.color; });
 
   //offsets for tooltips
