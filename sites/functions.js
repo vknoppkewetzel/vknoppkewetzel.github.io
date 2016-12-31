@@ -1,11 +1,16 @@
 window.onload = function() {
-
 var arrFull = []; 
 var input = "y";
 var committed = "rgba(176, 226, 179, .5)";
 var planned = "rgba(241, 199, 136, .5)";
+var title = prompt("Welcome to the Gantt Generator. What would you like to title this chart as?");
 
-var ganttDuration = prompt("Welcome to the Gantt Generator. Please enter entire duration of Gantt Chart in total number of months.");
+document.getElementById("title").textContent = title;
+
+
+
+
+var ganttDuration = prompt("Please enter entire duration of Gantt Chart in total number of months.");
 //in months, full gantt chart, ie, 3 years - 36 months, etc
 ganttDuration = Number(ganttDuration); //ensures is Number
 while(isNaN(ganttDuration)){
