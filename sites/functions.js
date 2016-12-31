@@ -169,7 +169,9 @@ var ganArr = [];
 
 createGantt();
 
-var remainder = (ganttDuration%12);
+var remainder = (ganttDuration%12); //total of remainder months/units
+
+var lastRem = remainder - (13-startMonth); // 13 for offset // creating to check if end of year has remainder months
 
 var years = { //set up years object so Years are in one row only
   label: "Years",
@@ -201,18 +203,6 @@ function createYears(){ //cycling through period to add years in
   var addRem =  (12-startMonth)+1; //adjusting remainder for start, plus +1 for offset
 //////below is for loop that checks what situation the loop is in, and adds year label accordingly////
   for(i = 0; i <= period; i++){
-    if(i == period && (start + addRem*unit + (unit *(12*(i))) >= 12*unit ) ){ //checking because sometimes remainder causes another year to still be on calendar
-      years.times.push(
-        {"color":"white", 
-        "label":startYear+i, 
-        "starting_time": start +addRem*unit + (unit *(12*(i-1))),//subtracting one b/c of offset
-        "ending_time": start + addRem*unit + (unit *(12*(i-1))),
-        }
-      );
-    }
-    if(i == period && remainder ==0){
-      return; //so that even years dont have extra year label on right
-    }
     if(i == 0){
       years.times.push(
       {"color":"white", 
@@ -229,6 +219,18 @@ function createYears(){ //cycling through period to add years in
         "ending_time": start + addRem*unit + (unit *(12*(i-1))),
         }
       );
+    }
+    if(i == period && lastRem >= 4 ){ //checking because sometimes remainder causes another year to still be on calendar
+      years.times.push(
+        {"color":"white", 
+        "label":startYear+i+1, 
+        "starting_time": start +addRem*unit + (unit *(12*(i))),
+        "ending_time": start + addRem*unit + (unit *(12*(i))),
+        }
+      );
+    }
+    if(i == period && lastRem < 4 ){
+      return; //add nothing because remainder on end of calendar is too small
     }
   }
 }
