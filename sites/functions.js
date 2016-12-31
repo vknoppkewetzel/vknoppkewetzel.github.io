@@ -14,7 +14,16 @@ while(ganttDuration > 60){
   var ganttDuration = ganttD();
 }
 
-var startMonth = prompt("Please enter starting month of Gantt Chart (1 - 12). For example: if first funding on chart begins in August, enter 7.");
+var startYear = prompt("What year does this chart begin in? please enter xxxx format, ie, 2016:");
+startYear = Number(startYear);
+checkYear();
+
+while(startYear <1964 || startYear >2080){
+  startYear = prompt("Your year input may be too far in the past or too far in the future! Please re-enter an appropriate starting year:");
+  checkYear();
+}
+
+var startMonth = prompt("Please enter starting month of Gantt Chart (1 - 12). For example: if first funding on chart begins in August, enter 7:");
 startMonth = Number(startMonth);  
 checkMonth(); //checks if actually a number
 
@@ -27,7 +36,7 @@ while(startMonth <1 || startMonth>12){ //make sure only 1 - 12 is input
 while(input !== "quit"){ ///partner information only
   if(input === "y"){
 
-    var partner = prompt("Please enter Partner name:");
+    var partner = prompt("Begin a row in the chart by entering a Partner's name:");
     var startDuration = sDuration();
 
     while(startDuration > ganttDuration){
@@ -104,6 +113,15 @@ function checkMonth(){ //checking if month is nmber or not
   }
 }
 
+function checkYear(){ //checking if month is nmber or not
+    while(isNaN(startYear)){ 
+    if(isNaN(startYear)){
+      startYear = prompt("Please enter a number");
+    }
+    startYear = Number(startYear);
+  }
+}
+
 function sDuration(){ //function to create start Duration variable above in while loop
   var startDuration = prompt("Please enter how many months from start of Gantt Chart this program begins. If first month is August, then August is 0; if first month of funding is December and first month of Gantt Chart is August, then count how many months from August your funding begins (December is 4 months from August):"); // how many months from start of gantt chart did program start, ie:
 
@@ -140,7 +158,7 @@ function ifPC(){ //making sure commit vs planned is only a 1 or 2, otherwise re-
     checkNum = true;
   }
 }
-/////////////////////////////////--------------//////////////////////////////////
+/////////////////////////////////-------The below sets up rest of chart-------//////////////////////////////////
 
 var unit = 3600000; //interval to evenly change between hours - also 
 //pseudo month since 12 hour cycle is used for display
@@ -148,6 +166,18 @@ var start = unit * (startMonth+6);//*(startMonth+6); //time stamp has weird offs
 var end = start + unit * ganttDuration;
 
 var ganArr = [];
+
+createGantt();
+
+var remainder = (ganttDuration%12);
+
+var years = { //set up years object so Years are in one row only
+  label: "Years",
+  times: [ 
+  ]
+};
+
+createYears();
 
 function createGantt(){ //populate Gantt Chart per input in prompts 
   for(i = 0; i< arrFull.length; i++){
@@ -166,15 +196,51 @@ function createGantt(){ //populate Gantt Chart per input in prompts
   }
 }
 
-createGantt();
+function createYears(){ //cycling through period to add years in
+  var period = (ganttDuration - remainder)/12; //find how many years needed to label
+  var addRem =  (12-startMonth)+1; //adjusting remainder for start, plus +1 for offset
+//////below is for loop that checks what situation the loop is in, and adds year label accordingly////
+  for(i = 0; i <= period; i++){
+    if(i == period && (start + addRem*unit + (unit *(12*(i))) >= 12*unit ) ){ //checking because sometimes remainder causes another year to still be on calendar
+      years.times.push(
+        {"color":"white", 
+        "label":startYear+i, 
+        "starting_time": start +addRem*unit + (unit *(12*(i-1))),//subtracting one b/c of offset
+        "ending_time": start + addRem*unit + (unit *(12*(i-1))),
+        }
+      );
+    }
+    if(i == period && remainder ==0){
+      return; //so that even years dont have extra year label on right
+    }
+    if(i == 0){
+      years.times.push(
+      {"color":"white", 
+      "label":startYear+i, 
+      "starting_time": start  + (unit *(12*i)),
+      "ending_time": start  + (unit *(12*i)),
+      }
+      );
+    }else{
+      years.times.push(
+        {"color":"white", 
+        "label":startYear+i, 
+        "starting_time": start +addRem*unit + (unit *(12*(i-1))),//subtracting one b/c of offset
+        "ending_time": start + addRem*unit + (unit *(12*(i-1))),
+        }
+      );
+    }
+  }
+}
 
+ganArr.push(years); //pushing years content into ganArr so can be created below
 
 var width = 800; //changes size of graph
 
 
   function ganttChart() {
     var chart = d3.timeline()
-      .beginning(start) // we can optionally add beginning and ending times to speed up rendering a little
+      .beginning(start) // start/end of graph
       .ending(end)
       .stack() // toggles graph stacking
       .showTimeAxisTick() //adds grid tick format
