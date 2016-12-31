@@ -23,7 +23,9 @@
 }
 
 h3{
-  padding-left: 300px;
+  padding-left: 100px;
+  width: 700px;
+  text-align: center;
   -webkit-margin-after: 0;
 }
 
