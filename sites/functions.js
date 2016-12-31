@@ -32,14 +32,14 @@ while(input !== "quit"){ ///partner information only
     var startDuration = sDuration();
 
     while(startDuration > ganttDuration){
-      alert("Uh Oh! Looks like you accidently made the starting point bigger than the Gantt Chart! Please re-enter start info for " + partner);
+      alert("Uh Oh! Looks like you accidently made the starting point bigger than the Gantt Chart (" + ganttDuration + " months)! Please re-enter start info for " + partner);
       var startDuration = sDuration(); 
     }
 
     var pDuration = progDuration();
 
     while(pDuration > ganttDuration){ //ensuring people don't have to start over if they accidently enter something too big
-      alert("Uh Oh! Looks like you put in a program duration longer than the currently indicated Gantt Chart time frame. Please re-enter " + partner + "'s month duration.");
+      alert("Uh Oh! Looks like you entered a program duration longer than your Gantt Chart time frame (" + ganttDuration + " months). Please re-enter " + partner + "'s month duration.");
     var pDuration = progDuration();  
     }
 
