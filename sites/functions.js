@@ -7,17 +7,11 @@ var title = prompt("Welcome to the Gantt Generator. What would you like to title
 
 document.getElementById("title").textContent = title;
 
+var ganttDuration = ganttD();
 
-
-
-var ganttDuration = prompt("Please enter entire duration of Gantt Chart in total number of months.");
-//in months, full gantt chart, ie, 3 years - 36 months, etc
-ganttDuration = Number(ganttDuration); //ensures is Number
-while(isNaN(ganttDuration)){
-  if(isNaN(ganttDuration)){
-    ganttDuration = prompt("You have not entered a number. Please try again:");
-  }
-  ganttDuration = Number(ganttDuration);
+while(ganttDuration > 60){
+  alert("Please enter a time period of less than 5 years as this chart only visualizes up to 60 months. Thank you.");
+  var ganttDuration = ganttD();
 }
 
 var startMonth = prompt("Please enter starting month of Gantt Chart (1 - 12). For example: if first funding on chart begins in August, enter 7.");
@@ -88,6 +82,19 @@ while(input !== "quit"){ ///partner information only
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////some functions to make while loop easier to read /////////////////////////////
+function ganttD(){
+  var ganttDuration = prompt("Please enter entire duration of Gantt Chart in total number of months.");
+  //in months, full gantt chart, ie, 3 years - 36 months, etc
+  ganttDuration = Number(ganttDuration); //ensures is Number
+  while(isNaN(ganttDuration)){
+    if(isNaN(ganttDuration)){
+      ganttDuration = prompt("You have not entered a number. Please try again:");
+    }
+    ganttDuration = Number(ganttDuration);
+  }
+  return ganttDuration;
+}
+
 function checkMonth(){ //checking if month is nmber or not
     while(isNaN(startMonth)){ 
     if(isNaN(startMonth)){
