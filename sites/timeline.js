@@ -16,7 +16,7 @@
         height = null,
         rowSeparatorsColor = null,
         backgroundColor = null,
-        tickFormat = { format: d3.time.format("%I"),
+        tickFormat = { format: d3.time.format("%-I"),
           //tickTime: d3.time.years,
           tickTime: d3.time.hours,
           tickInterval: 1,
