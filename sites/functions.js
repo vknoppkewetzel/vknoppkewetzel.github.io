@@ -47,9 +47,16 @@ while(input !== "quit"){ ///partner information only
     var pDuration = progDuration();
 
     while(pDuration > ganttDuration){ //ensuring people don't have to start over if they accidently enter something too big
+      alert("Uh Oh! Looks like your program duration is too big for the current chart (" + ganttDuration + " months). Please re-enter " + partner + "'s month duration.");
+    var pDuration = progDuration();  
+    }
+    
+    while(startDuration + pDuration > ganttDuration){ //ensuring people don't have to start over if they accidently enter something too big
       alert("Uh Oh! Looks like you entered a program duration longer than your Gantt Chart time frame (" + ganttDuration + " months). Please re-enter " + partner + "'s month duration.");
     var pDuration = progDuration();  
     }
+    
+    var pDuration = startDuration + pDuration; //adding together units
 
     var funding = prompt("Please enter funding amount for this Partner ($x,xxx,xxx):"); // funding
     var planCom = prompt("Finally, is this funding currently Planned or Committed? Enter '1' for Planned or '2' for Committed:");
