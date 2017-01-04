@@ -23,7 +23,7 @@ while(startYear <1964 || startYear >2080){
   checkYear();
 }
 
-var startMonth = prompt("Please enter starting month of Gantt Chart (1 - 12). For example: if first funding on chart begins in August, enter 7:");
+var startMonth = prompt("Please enter starting month of Gantt Chart (1 - 12). For example: if first funding on chart begins in August, enter 8:");
 startMonth = Number(startMonth);  
 checkMonth(); //checks if actually a number
 
