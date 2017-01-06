@@ -4,7 +4,7 @@ var committed = "rgba(176, 226, 179, .5)";
 var planned = "rgba(241, 199, 136, .5)";
 
 
-d3.csv("gantt.csv", function(dataSheet) {
+d3.csv("/sites/gantt.csv", function(dataSheet) {
   
   dataSheet.forEach(function(d) {
     d.partner = d.partner,
