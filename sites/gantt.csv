@@ -1,0 +1,8 @@
+partner,start_d,end_d,s_month,duration,planned,committed,startYear,startMonth,gDuration,title
+Partner 1,9/27/2016,1/18/2017,28,5,"$1,000,000 ",0,2014,4,44,Funding Test
+Partner 2,1/1/2017,9/30/2017,33,8,"$3,000,000 ",0,2014,4,44,Funding Test
+Partner 3,3/1/2015,2/1/2017,11,23,0,"$250,000 ",2014,4,44,Funding Test
+Ex 4,1/15/2017,3/22/2017,33,2,"$100,000 ",0,2014,4,44,Funding Test
+Example 5,4/20/2014,9/30/2015,0,17,0,N/A,2014,4,44,Funding Test
+Ex 6,12/11/2015,8/31/2016,20,8,0,"$4,510,234 ",2014,4,44,Funding Test
+Example 7,9/30/2016,12/31/2017,28,15,unknown,0,2014,4,44,Funding Test
