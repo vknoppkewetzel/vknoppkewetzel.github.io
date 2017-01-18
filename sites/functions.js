@@ -5,7 +5,7 @@ var planned = "rgba(241, 199, 136, .5)";
 var estimateColor  = "rgba(225, 199, 225, .5)";
 
 
-d3.csv("/dummy_sheet.csv", function(dataSheet) {
+d3.csv("/sites/gantt.csv", function(dataSheet) {
   
   dataSheet.forEach(function(d) {
     d.partner = d.partner,
