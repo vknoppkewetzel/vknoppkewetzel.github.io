@@ -2,9 +2,10 @@ window.onload = function() {
 var arrFull = []; 
 var committed = "rgba(176, 226, 179, .5)";
 var planned = "rgba(241, 199, 136, .5)";
+var estimateColor  = "rgba(225, 199, 225, .5)";
 
 
-d3.csv("/sites/gantt.csv", function(dataSheet) {
+d3.csv("/dummy_sheet.csv", function(dataSheet) {
   
   dataSheet.forEach(function(d) {
     d.partner = d.partner,
@@ -15,6 +16,7 @@ d3.csv("/sites/gantt.csv", function(dataSheet) {
     d.planned = d.planned,
     d.committed = d.committed,
     d.ganttDuration = +d.gDuration,
+    d.estimate = +d.estimate;
     d.startYear = +d.startYear,
     d.startMonth = +d.startMonth,
     d.title = d.title
@@ -27,7 +29,7 @@ d3.csv("/sites/gantt.csv", function(dataSheet) {
   var startMonth = arrayTest[0].startMonth;
   var unit = 3600000; //interval to evenly change between hours - also 
   var width = 800; //changes size of graph
-  var start = unit * (startMonth+6);//*(startMonth+6); //time stamp has weird offset where 7 = 01, 1 = 07....
+  var start = unit * (startMonth+5);//*(startMonth+6); //time stamp has weird offset where 7 = 01, 1 = 07....
   var end = start + unit * ganttDuration;
   var remainder = (ganttDuration%12); //total of remainder months/units
   var lastRem = remainder - (13-startMonth); // 13 for offset // creating to check if end of year has remainder months
@@ -36,6 +38,8 @@ d3.csv("/sites/gantt.csv", function(dataSheet) {
     times: [ 
     ]
   };
+
+  console.log(startMonth);
 
   document.getElementById("title").textContent = title;
 
@@ -61,6 +65,7 @@ function printArray(){
   var committedCSV;
   var planCom;
   var funding;
+  var estimate;
 
 
 
@@ -73,6 +78,7 @@ function printArray(){
     pDuration = arrayTest[i].duration;
     plannedCSV = arrayTest[i].planned;
     committedCSV = arrayTest[i].committed;
+    estimate = arrayTest[i].estimate;
 
 
     if (plannedCSV == 0){
@@ -84,11 +90,12 @@ function printArray(){
       funding = plannedCSV;
       planCom = planned;
     }
+    if (estimate == 1){
+      planCom = estimateColor;
+    }
 
   arrFull.push([partner, startDuration, pDuration, funding, planCom]);
   }
-
-  console.log(arrFull);
 
   
 }
@@ -132,8 +139,8 @@ function createYears(years, ganttDuration, remainder, startMonth, lastRem, start
       years.times.push(
         {"color":"white", 
         "label":startYear+i, 
-        "starting_time": start +addRem*unit + (unit *(12*(i-1))),//subtracting one b/c of offset
-        "ending_time": start + addRem*unit + (unit *(12*(i-1))),
+        "starting_time": start + unit +addRem*unit + (unit *(12*(i-1))),//subtracting one b/c of offset
+        "ending_time": start + unit + addRem*unit + (unit *(12*(i-1))),
         }
       );
     }
@@ -141,8 +148,8 @@ function createYears(years, ganttDuration, remainder, startMonth, lastRem, start
       years.times.push(
         {"color":"white", 
         "label":startYear+i+1, 
-        "starting_time": start +addRem*unit + (unit *(12*(i))),
-        "ending_time": start + addRem*unit + (unit *(12*(i))),
+        "starting_time": start + unit +addRem*unit + (unit *(12*(i))),
+        "ending_time": start + unit + addRem*unit + (unit *(12*(i))),
         }
       );
     }
