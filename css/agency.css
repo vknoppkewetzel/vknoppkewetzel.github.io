@@ -52,8 +52,8 @@ h4,
 h5,
 h6 {
     text-transform: uppercase;
-    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 700;
+    font-family: Josefin Sans,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 500;
 }
 
 .img-centered {
@@ -69,12 +69,12 @@ h6 {
 }
 
 .btn-primary {
-    border-color: #cc0000;
+    border-color: #b2d8b2;
     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
     color: #fff;
-    background-color: #cc0000;
+    background-color: #b2d8b2;
 }
 
 .btn-primary:hover,
@@ -82,9 +82,9 @@ h6 {
 .btn-primary:active,
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary {
-    border-color: #b2d8b2;
+    border-color: #a0c2a0;
     color: #fff;
-    background-color: #b2d8b2;
+    background-color: #a0c2a0;
 }
 
 .btn-primary:active,
@@ -160,18 +160,18 @@ fieldset[disabled] .btn-xl:active,
 .btn-xl.disabled.active,
 .btn-xl[disabled].active,
 fieldset[disabled] .btn-xl.active {
-    border-color: #cc0000;
-    background-color: #cc0000;
+    border-color: #b2d8b2;
+    background-color: #b2d8b2;
 }
 
 .btn-xl .badge {
-    color: #cc0000;
+    color: #b2d8b2;
     background-color: #fff;
 }
 
 .navbar-default {
     border-color: transparent;
-    background-color: #222;
+    background-color: #fff;
 }
 
 .navbar-default .navbar-brand {
@@ -407,7 +407,7 @@ section h3.section-subheading {
 
 #portfolio .portfolio-item .portfolio-caption h4 {
     margin: 0;
-    text-transform: none;
+   /*  text-transform: none; */
 }
 
 #portfolio .portfolio-item .portfolio-caption p {
