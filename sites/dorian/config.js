@@ -75,7 +75,7 @@ var config = {
       //title: 'East Coast',
       // image: './path/to/image/source.png',
       description:
-        '.... made landfall over Cape Hatteras, North Carolina as a Category 1 storm before continuing north and eventually disipating.',
+        '.... made landfall over Cape Hatteras, North Carolina as a Category 1 storm before continuing north and eventually dissipating.',
       location: {
         center: [-76.289, 32.517],
         zoom: 5.5,
