@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Label halo blend testing</title>
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js"></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+      #blendMap {
+        mix-blend-mode: exclusion;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+      .dg.a {
+        float: left !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="blendMap"></div>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.7/dat.gui.min.js"
+    ></script>
+
+    <script>
+      var lightBase = 'mapbox://styles/vkwetzel/ckiqg70yv0txb17mrbmvhmicd';
+      var darkBase = `mapbox://styles/vkwetzel/ckirq5rn307ol19p3q43ucfzx`;
+      var dusk = 'mapbox://styles/vkwetzel/ckiqehe4314y617p83l036v4t';
+      var sunrise = 'mapbox://styles/vkwetzel/ckiqdxxeh3f9v17msk8e4v0ps';
+      var overcast = 'mapbox://styles/vkwetzel/ckiqen4zw0sf217mraoyaghol';
+
+      var HaloDemo = function () {
+        //starting state of window
+        this.lightBlend = `exclusion`;
+        this.blendColor = sunrise;
+        this.baseSat = lightBase;
+      };
+
+      var halodemo = new HaloDemo();
+
+      window.onload = function () {
+        var gui = new dat.GUI(); // eslint-disable-line
+
+        var lightBlend = gui.add(halodemo, 'lightBlend', [
+          `normal`,
+          `multiply`,
+          `screen`,
+          `overlay`,
+          `darken`,
+          `lighten`,
+          `color-dodge`,
+          `color-burn`,
+          `hard-light`,
+          `soft-light`,
+          `difference`,
+          `exclusion`,
+          `hue`,
+          `saturation`,
+          `color`,
+          `luminosity`
+        ]);
+        lightBlend.onFinishChange((value) => {
+          document.querySelector(`#blendMap`).style.mixBlendMode = value;
+        });
+
+        var blendColor = gui.add(halodemo, 'blendColor', [
+          dusk,
+          sunrise,
+          overcast
+        ]);
+        blendColor.onFinishChange((value) => {
+          blendMap.setStyle(value);
+        });
+
+        //there is a 3D Terrain sync issue happening, so turning off for now
+
+        var baseSat = gui.add(halodemo, 'baseSat', [lightBase, darkBase]);
+        baseSat.onFinishChange((value) => {
+          map.setStyle(value);
+        });
+      };
+
+      mapboxgl.accessToken =
+        'pk.eyJ1Ijoidmt3ZXR6ZWwiLCJhIjoiY2swNzNzamw3MDB6azNtcGVvN3cxNTJzZSJ9.YY56WOsc0ZNIK9YTwosnTw';
+      var map = new mapboxgl.Map({
+        container: 'map',
+        zoom: 15,
+        center: [-105.424, 39.736],
+        pitch: 80,
+        bearing: 80,
+        style: 'mapbox://styles/vkwetzel/ckiqg70yv0txb17mrbmvhmicd' //sat layer
+      });
+      //change top map to be only labels to show different blending modes
+      //maps need to be synced
+
+      map.on('load', function () {
+        map.addSource('mapbox-dem', {
+          type: 'raster-dem',
+          url: 'mapbox://mapbox.mapbox-terrain-dem-v1',
+          tileSize: 512,
+          maxzoom: 14
+        });
+        // add the DEM source as a terrain layer with exaggerated height
+        map.setTerrain({ source: 'mapbox-dem', exaggeration: 1.5 });
+
+        // add a sky layer that will show when the map is highly pitched
+        map.addLayer({
+          id: 'sky',
+          type: 'sky',
+          paint: {
+            'sky-type': 'atmosphere',
+            'sky-atmosphere-sun': [0.0, 0.0],
+            'sky-atmosphere-sun-intensity': 15
+          }
+        });
+      });
+
+      //dusk: mapbox://styles/vkwetzel/ckiqehe4314y617p83l036v4t
+      //sunrise: mapbox://styles/vkwetzel/ckiqdxxeh3f9v17msk8e4v0ps
+      // overcast: mapbox://styles/vkwetzel/ckiqen4zw0sf217mraoyaghol
+      var blendMap = new mapboxgl.Map({
+        //this is top labels
+        container: 'blendMap',
+        zoom: 15,
+        center: [-105.424, 39.736],
+        pitch: 80,
+        bearing: 80,
+        style: 'mapbox://styles/vkwetzel/ckiqdxxeh3f9v17msk8e4v0ps'
+      });
+
+      function moveToMapPosition(master, clones) {
+        var center = master.getCenter();
+        var zoom = master.getZoom();
+        var bearing = master.getBearing();
+        var pitch = master.getPitch();
+
+        clones.forEach(function (clone) {
+          clone.jumpTo({
+            center: center,
+            zoom: zoom,
+            bearing: bearing,
+            pitch: pitch
+          });
+        });
+      }
+
+      function syncMaps() {
+        var maps;
+        var argLen = arguments.length;
+        if (argLen === 1) {
+          maps = arguments[0];
+        } else {
+          maps = [];
+          for (var i = 0; i < argLen; i++) {
+            maps.push(arguments[i]);
+          }
+        }
+
+        // Create all the movement functions, because if they're created every time
+        // they wouldn't be the same and couldn't be removed.
+        var fns = [];
+        maps.forEach(function (map, index) {
+          fns[index] = sync.bind(
+            null,
+            map,
+            maps.filter(function (o, i) {
+              return i !== index;
+            })
+          );
+        });
+
+        function on() {
+          maps.forEach(function (map, index) {
+            map.on('move', fns[index]);
+          });
+        }
+
+        function off() {
+          maps.forEach(function (map, index) {
+            map.off('move', fns[index]);
+          });
+        }
+
+        // When one map moves, we turn off the movement listeners
+        // on all the maps, move it, then turn the listeners on again
+        function sync(master, clones) {
+          off();
+          moveToMapPosition(master, clones);
+          on();
+        }
+
+        on();
+        return function () {
+          off();
+          fns = [];
+        };
+      }
+      syncMaps(map, blendMap);
+    </script>
+  </body>
+</html>
